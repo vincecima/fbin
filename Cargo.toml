@@ -3,8 +3,34 @@ name = "fbin"
 version = "0.1.0"
 edition = "2021"
 description = "A simple CLI for the Feedbin REST API v2"
+repository = "https://github.com/vincecima/fbin"
+authors = ["Vince Cima"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 clap = "4.5.1"
+
+# The profile that 'cargo dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
+
+# Config for 'cargo dist'
+[workspace.metadata.dist]
+# The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
+cargo-dist-version = "0.11.1"
+# CI backends to support
+ci = ["github"]
+# The installers to generate for each app
+installers = ["shell", "powershell", "homebrew", "msi"]
+# Target platforms to build apps for (Rust target-triple syntax)
+targets = ["aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
+# Publish jobs to run in CI
+pr-run-mode = "plan"
+
+[package.metadata.wix]
+upgrade-guid = "3BF2030D-E58A-4922-8152-8A02250EC48B"
+path-guid = "1FE68064-AE64-476F-BBFB-D6A174383BEA"
+license = false
+eula = false
