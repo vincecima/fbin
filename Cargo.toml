@@ -10,6 +10,7 @@ authors = ["Vince Cima"]
 
 [dependencies]
 clap = "4.5.1"
+reqwest = { version = "0.11.24", features = ["blocking", "json"] }
 
 # The profile that 'cargo dist' will build with
 [profile.dist]
